@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { getTasksByAuthId } from "@/lib/query/getTasksCurrUser"; 
 import { currentUser } from "@clerk/nextjs/server";
+import Link from "next/link";
 // import TodoForm from "./components/Todoform";
 
 // Define a type for clarity, based on the assumed properties in your original component
@@ -37,6 +38,13 @@ export default async function Dashboard() {
       </div> */}
 
       <h2 className="text-2xl font-semibold pb-2 text-gray-700">Task List</h2>
+      <div className="mb-6">
+        <Link href="/create">
+          <button className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+            + Create New Task
+          </button>
+        </Link>
+      </div>
       
       {todos.length === 0 ? (
         <p className="text-gray-500 italic">No tasks created yet. Use the form above to add one!</p>

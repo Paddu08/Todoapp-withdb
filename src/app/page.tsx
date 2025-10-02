@@ -1,16 +1,25 @@
+// app/page.tsx
 import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+import { SignInButton } from "@clerk/nextjs";
 
 export default async function Home() {
-  
-    
-  const curr=await currentUser()
-  console.log(curr)
+  const user = await currentUser();
+
+  // If user is signed in, redirect to dashboard
+  if (user) {
+    redirect("/dashboard"); 
+  }
+
+  // If not signed in, show sign-in button
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-      </main>
-  
-     
+    <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+      <h1>Welcome! Please sign in</h1>
+      <SignInButton mode="modal">
+        <button className="px-4 py-2 bg-blue-600 text-white rounded">
+          Sign In
+        </button>
+      </SignInButton>
     </div>
   );
 }

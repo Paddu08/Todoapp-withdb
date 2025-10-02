@@ -64,7 +64,7 @@ export async function createTask(title: string, description?: string) {
       .returning(); // Get the inserted task back
 
     // 4. Cache Invalidation
-    revalidatePath("/tasks/dashboard");
+    revalidatePath("/dashboard");
     
     return { 
       success: true, 
