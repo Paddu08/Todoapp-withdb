@@ -1,17 +1,15 @@
-// Assuming these are available as part of your project setup
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { getTasksByAuthId } from "@/lib/query/getTasksCurrUser"; 
 import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
-// import TodoForm from "./components/Todoform";
 
-// Define a type for clarity, based on the assumed properties in your original component
+
 
 
 
 export default async function Dashboard() {
-  // Fetch user details on the server
   const user = await currentUser(); 
   const authId = user?.id;
   const firstName = user?.firstName || "Guest";
@@ -21,9 +19,6 @@ export default async function Dashboard() {
     return <p className="p-8 text-center text-lg">Please log in to see your dashboard.</p>;
   }
 
-  // 🚀 DIRECT SERVER CALL: Fetches data before the page loads
-  // Replace with your actual import:
-  // const todos = await getTasksByAuthId(authId); 
   const todos = await getTasksByAuthId(authId); 
   
   return (
@@ -32,10 +27,7 @@ export default async function Dashboard() {
         Welcome back, <span className="text-indigo-600">{firstName}</span>
       </h1>
 
-      {/* Todo Form component (Mutation) */}
-      {/* <div className="w-full">
-        <TodoForm />
-      </div> */}
+    
 
       <h2 className="text-2xl font-semibold pb-2 text-gray-700">Task List</h2>
       <div className="mb-6">
