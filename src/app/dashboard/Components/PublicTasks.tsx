@@ -1,7 +1,6 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
 import { getPublicLinksByUserId } from "@/lib/query/getPublicLinks";
 
 export default async function PublicTasks() {
@@ -35,7 +34,7 @@ export default async function PublicTasks() {
             <TableCell className="font-medium">{link.taskTitle || '—'}</TableCell>
             <TableCell className="text-sm text-blue-600 max-w-xs truncate">
               <a href={`/public/${link.token}`} target="_blank" rel="noopener noreferrer">
-                {`${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/public/${link.token}`}
+                {`${link.token}`}
               </a>
             </TableCell>
             <TableCell className="text-center">{new Date(link.createdAt).toLocaleString()}</TableCell>

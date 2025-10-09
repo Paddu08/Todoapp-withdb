@@ -62,11 +62,13 @@ export default async function Dashboard() {
                 <TableHead className="w-[40%] text-indigo-700">Description</TableHead>
                 <TableHead className="w-[20%] text-indigo-700 text-center">Status</TableHead>
                 <TableHead className="w-[20%] text-indigo-700 text-center">Share</TableHead>
+                          <TableHead className="w-[10%] text-indigo-700 text-center">Shared with</TableHead>
+
               </TableRow>
             </TableHeader>
             <TableBody>
               {todos.map((todo) => (
-                <TableRow key={todo.task_id}>
+                <TableRow key={todo.taskId}>
                   <TableCell className="font-medium">{todo.title}</TableCell>
                   <TableCell className="text-sm text-gray-500 max-w-xs truncate">{todo.description || '—'}</TableCell>
                   <TableCell className="text-center">
@@ -81,8 +83,9 @@ export default async function Dashboard() {
                     </Badge>
                   </TableCell>
                         <TableCell className="text-center">
-        <ShareButton currentUserId={userId} users={users}taskId={todo.task_id} />
+        <ShareButton currentUserId={userId} users={users}taskId={todo.taskId} />
       </TableCell>
+      <TableCell className="text-center">{todo.sharedWith}</TableCell>
 
                 </TableRow>
               ))}

@@ -9,6 +9,7 @@ const user=await getCurrUser(authId)
   // Step 2: Get all shared tasks for this user
   const sharedTasks = await db
     .select({
+        shareId:sharedTaskTable.share_id,
       taskId: taskTable.task_id,
       title: taskTable.title,
       description: taskTable.description,

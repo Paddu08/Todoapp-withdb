@@ -26,11 +26,12 @@ export default async function SharedTasks() {
           <TableHead className="w-[40%] text-indigo-700">Shared by</TableHead>
           <TableHead className="w-[20%] text-indigo-700 text-center">Access</TableHead>
           <TableHead className="w-[10%] text-indigo-700 text-center">Status</TableHead>
+          
         </TableRow>
       </TableHeader>
       <TableBody>
         {sharedTodos.map((task) => (
-          <TableRow key={task.taskId}>
+          <TableRow key={task.shareId}>
             <TableCell className="font-medium">{task.title}</TableCell>
             <TableCell className="text-sm text-gray-500 max-w-xs truncate">{task.userId || '—'}</TableCell>
             <TableCell className="text-center">
