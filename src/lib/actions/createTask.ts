@@ -16,7 +16,6 @@ import { taskTable, usersTable } from "@/db/schema"; // Corrected to usersTable
  * @param description The optional description of the task.
  */
 export async function createTask(title: string, description?: string) {
-  // 1. Fetch Clerk user details securely on the server
   const clerkUser = await currentUser();
   const clerkAuthId = clerkUser?.id; // This is the Clerk ID (authId)
 
@@ -31,7 +30,6 @@ export async function createTask(title: string, description?: string) {
   }
 
   try {
-    // 2. LOOKUP: Find the internal foreign key ID from the usersTable
     const [internalUser] = await db
       .select({ id: usersTable.id }) // Select the internal ID column
       .from(usersTable)

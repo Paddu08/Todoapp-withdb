@@ -2,8 +2,13 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { getTasksByAuthId } from "@/lib/query/getTasksCurrUser"; 
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
+import SharedTasks from './Components/SharedTasks';
+import ShareButton from './Components/ShareButton';
+import { getUsers } from '@/lib/query/getUsers';
+import { getCurrUser } from '@/lib/query/getCurrUser';
+
 
 
 
@@ -12,6 +17,8 @@ import Link from "next/link";
 export default async function Dashboard() {
   const user = await currentUser(); 
   const authId = user?.id;
+  
+  
   const firstName = user?.firstName || "Guest";
 
   if (!authId) {
@@ -20,6 +27,10 @@ export default async function Dashboard() {
   }
 
   const todos = await getTasksByAuthId(authId); 
+  const currUser=await getCurrUser(authId)
+  const userId=currUser.id
+  const users=await getUsers()
+
   
   return (
     <div className="font-sans p-8 min-h-screen flex flex-col gap-10 max-w-4xl mx-auto">
@@ -37,17 +48,19 @@ export default async function Dashboard() {
           </button>
         </Link>
       </div>
-      
+       <h4>Tasks</h4>
       {todos.length === 0 ? (
         <p className="text-gray-500 italic">No tasks created yet. Use the form above to add one!</p>
       ) : (
         <div className="rounded-xl border shadow-lg">
+         
           <Table>
             <TableHeader className="bg-gray-50">
               <TableRow className="hover:bg-gray-50">
                 <TableHead className="w-[40%] text-indigo-700">Title</TableHead>
                 <TableHead className="w-[40%] text-indigo-700">Description</TableHead>
                 <TableHead className="w-[20%] text-indigo-700 text-center">Status</TableHead>
+                <TableHead className="w-[20%] text-indigo-700 text-center">Share</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -66,12 +79,22 @@ export default async function Dashboard() {
                       {todo.isCompleted ? 'Complete' : 'Pending'}
                     </Badge>
                   </TableCell>
+                        <TableCell className="text-center">
+        <ShareButton currentUserId={userId} users={users}taskId={todo.task_id} />
+      </TableCell>
+
                 </TableRow>
               ))}
             </TableBody>
           </Table>
+         
+          
         </div>
       )}
+       <h4> Shared Tasks</h4>
+ <SharedTasks/>
+      
     </div>
+
   );
 }

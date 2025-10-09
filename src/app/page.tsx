@@ -6,12 +6,10 @@ import { SignInButton } from "@clerk/nextjs";
 export default async function Home() {
   const user = await currentUser();
 
-  // If user is signed in, redirect to dashboard
   if (user) {
     redirect("/dashboard"); 
   }
 
-  // If not signed in, show sign-in button
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4">
       <h1>Welcome! Please sign in</h1>
