@@ -2,7 +2,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { getTasksByAuthId } from "@/lib/query/getTasksCurrUser"; 
-import { auth, currentUser } from "@clerk/nextjs/server";
+import {  currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
 import SharedTasks from './Components/SharedTasks';
 import ShareButton from './Components/ShareButton';
