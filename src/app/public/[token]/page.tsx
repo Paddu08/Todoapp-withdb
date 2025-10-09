@@ -3,16 +3,16 @@ import { publicTaskLinkTable, taskTable, usersTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ token: string }>;
+}) {
+  const { token } = await params;
 
-interface PublicTaskPageProps {
-  params: { token: string };
-  searchParams: Record<string, string | string[]>; // required even if unused
-}
+  if (!token) return notFound();
 
-export default async function PublicTaskPage({ params }: PublicTaskPageProps) {
-  const { token } = params;
-
-  // Fetch public link with task
+  // Fetch public link with task and owner info
   const publicLink = await db
     .select({
       taskId: publicTaskLinkTable.taskId,
@@ -22,18 +22,16 @@ export default async function PublicTaskPage({ params }: PublicTaskPageProps) {
       expiresAt: publicTaskLinkTable.expiresAt,
     })
     .from(publicTaskLinkTable)
-    .leftJoin(taskTable, eq(taskTable.task_id, publicTaskLinkTable.taskId)) // ✅ use eq()
-  .leftJoin(usersTable, eq(usersTable.id, publicTaskLinkTable.userId))
-  .where(eq(publicTaskLinkTable.token, token))
+    .leftJoin(taskTable, eq(taskTable.task_id, publicTaskLinkTable.taskId))
+    .leftJoin(usersTable, eq(usersTable.id, publicTaskLinkTable.userId))
+    .where(eq(publicTaskLinkTable.token, token))
     .limit(1);
-
-  if (!publicLink[0]) {
-    return notFound();
-  }
 
   const task = publicLink[0];
 
-  // Check if link is expired
+  if (!task) return notFound();
+
+  // Check expiration
   const now = new Date();
   if (task.expiresAt < now) {
     return (
