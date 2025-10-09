@@ -9,6 +9,7 @@ import ShareButton from './Components/ShareButton';
 import { getUsers } from '@/lib/query/getUsers';
 import { getCurrUser } from '@/lib/query/getCurrUser';
 import PublicTasks from './Components/PublicTasks';
+import DeleteButton from './Components/DeleteIcon';
 
 
 
@@ -61,6 +62,8 @@ export default async function Dashboard() {
                 <TableHead className="w-[40%] text-indigo-700">Title</TableHead>
                 <TableHead className="w-[40%] text-indigo-700">Description</TableHead>
                 <TableHead className="w-[20%] text-indigo-700 text-center">Status</TableHead>
+                                <TableHead className="w-[20%] text-indigo-700 text-center">Delete</TableHead>
+
                 <TableHead className="w-[20%] text-indigo-700 text-center">Share</TableHead>
                           <TableHead className="w-[10%] text-indigo-700 text-center">Shared with</TableHead>
 
@@ -71,6 +74,7 @@ export default async function Dashboard() {
                 <TableRow key={todo.taskId}>
                   <TableCell className="font-medium">{todo.title}</TableCell>
                   <TableCell className="text-sm text-gray-500 max-w-xs truncate">{todo.description || '—'}</TableCell>
+
                   <TableCell className="text-center">
                     {/* Using Shadcn Badge component */}
                     <Badge variant={todo.isCompleted ? "default" : "secondary"} className={`
@@ -82,6 +86,8 @@ export default async function Dashboard() {
                       {todo.isCompleted ? 'Complete' : 'Pending'}
                     </Badge>
                   </TableCell>
+                                                      <TableCell className="text-sm text-gray-500 max-w-xs truncate"><DeleteButton taskId={todo.taskId}/></TableCell>
+
                         <TableCell className="text-center">
         <ShareButton currentUserId={userId} users={users}taskId={todo.taskId} />
       </TableCell>

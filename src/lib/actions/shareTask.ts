@@ -18,7 +18,6 @@ export async function shareTaskAction(taskId: number, userId: number) {
     .limit(1);
 
   if (existing.length > 0) {
-    // Already shared, do not allow duplicate
     return false;
   }
 

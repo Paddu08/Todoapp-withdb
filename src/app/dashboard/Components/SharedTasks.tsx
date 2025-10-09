@@ -12,7 +12,6 @@ export default async function SharedTasks() {
   }
 
   const sharedTodos = await getSharedTasksByAuthId(authId);
-  console.log(sharedTodos)
 
   if (sharedTodos.length === 0) {
     return <p className="text-gray-500 italic">No tasks shared yet!</p>;
