@@ -36,6 +36,13 @@
       "when": 1759379512696,
       "tag": "0004_petite_sabra",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1759991713473,
+      "tag": "0005_loose_rogue",
+      "breakpoints": true
     }
   ]
 }

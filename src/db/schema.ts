@@ -36,3 +36,16 @@ export const sharedTaskTable = pgTable("shared_task_table", {
   access: accessEnum("access").notNull().default("read"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
+
+export const publicTaskLinkTable = pgTable('public_task_link_table', {
+  public_id: serial('id').primaryKey(),
+ userId: integer('user_id') //owner of task
+    .notNull()
+    .references(() => usersTable.id, { onDelete: 'cascade' }),
+  taskId: integer('task_id') // task id from task_table
+    .notNull()
+    .references(() => taskTable.task_id, { onDelete: 'cascade' }),
+  token: text('token').notNull().unique(), 
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  expiresAt: timestamp('expiresAt').notNull(), // set dynamically when inserting
+});

@@ -8,6 +8,7 @@ import SharedTasks from './Components/SharedTasks';
 import ShareButton from './Components/ShareButton';
 import { getUsers } from '@/lib/query/getUsers';
 import { getCurrUser } from '@/lib/query/getCurrUser';
+import PublicTasks from './Components/PublicTasks';
 
 
 
@@ -93,6 +94,8 @@ export default async function Dashboard() {
       )}
        <h4> Shared Tasks</h4>
  <SharedTasks/>
+   <h4> Public Tasks</h4>
+ <PublicTasks/>
       
     </div>
 
