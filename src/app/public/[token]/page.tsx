@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 
 interface PublicTaskPageProps {
   params: { token: string };
+  searchParams: Record<string, string | string[]>; // required even if unused
 }
 
 export default async function PublicTaskPage({ params }: PublicTaskPageProps) {
