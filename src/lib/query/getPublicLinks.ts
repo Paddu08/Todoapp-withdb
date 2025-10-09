@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { getCurrUser } from "./getCurrUser";
 
 
+
 export async function getPublicLinksByUserId(auth_id: string) {
       const user = await getCurrUser(auth_id)
     
@@ -22,5 +23,10 @@ export async function getPublicLinksByUserId(auth_id: string) {
     .where(eq(publicTaskLinkTable.userId, user.id))
     .orderBy(publicTaskLinkTable.createdAt);
 
+
+    
   return links;
+
+
+  
 }

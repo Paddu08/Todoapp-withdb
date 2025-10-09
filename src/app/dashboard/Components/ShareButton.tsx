@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { shareTaskAction } from "@/lib/actions/shareTask";
 import { Checkbox } from "@/components/ui/checkbox";
 import { createPublicTaskLink } from "@/lib/actions/publicTaskLink";
+import {  useRouter } from "next/navigation";
+
 
 interface ShareButtonProps {
   taskId: number;
@@ -16,6 +18,7 @@ interface ShareButtonProps {
 
 export default function ShareButton({ taskId, users, currentUserId }: ShareButtonProps) {
   const [open, setOpen] = useState(false);
+  const router=useRouter()
   const [shareWith, setShareWith] = useState("");
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
   const [filteredUsers, setFilteredUsers] = useState<{ userId: number; name: string }[]>([]);
@@ -50,7 +53,9 @@ export default function ShareButton({ taskId, users, currentUserId }: ShareButto
       if (isPublic) {
         // create public link
         const result = await createPublicTaskLink(taskId);
-        alert(`Public link created:  (expires at ${result.expiresAt})`);
+        // alert(`Public link created:  (expires at ${result.expiresAt})`);
+   router.push("/dashboard")
+
       } else {
         if (!selectedUserId) return;
         await shareTaskAction(taskId, selectedUserId);

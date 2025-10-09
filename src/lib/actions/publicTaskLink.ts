@@ -6,6 +6,7 @@ import { randomBytes } from "crypto";
 import { eq } from "drizzle-orm";
 
 
+
 export async function createPublicTaskLink(taskId: number) {
   // Fetch task to get owner
   const task = await db.select()
@@ -38,4 +39,5 @@ export async function createPublicTaskLink(taskId: number) {
     expiresAt: inserted[0].expiresAt,
   
   };
+
 }
