@@ -52,7 +52,7 @@ export default async function Dashboard() {
       </div>
        <h4>Tasks</h4>
       {todos.length === 0 ? (
-        <p className="text-gray-500 italic">No tasks created yet. Use the form above to add one!</p>
+        <p className="text-gray-500 italic">No tasks  created yet. Use the form above to add one!</p>
       ) : (
         <div className="rounded-xl border shadow-lg">
          
