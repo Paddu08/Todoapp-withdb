@@ -8,7 +8,7 @@ export default async function SharedTasks() {
   const authId = user?.id;
 
   if (!authId) {
-    return <p className="p-8 text-center text-lg">Please log in to see your dashboard.</p>;
+    return <p className="p-8 text-center text-lg">Please  log in to see your dashboard.</p>;
   }
 
   const sharedTodos = await getSharedTasksByAuthId(authId);
