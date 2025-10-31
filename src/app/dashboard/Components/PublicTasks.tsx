@@ -8,7 +8,7 @@ export default async function PublicTasks() {
   const authId = user?.id;
 
   if (!authId) {
-    return <p className="p-8 text-center text-lg">Please  log in to see your public tasks.</p>;
+    return <p className="p-8 text-center text-lg">Please log in to see your public tasks.</p>;
   }
 
   // Fetch public links for current user
